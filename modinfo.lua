@@ -15,4 +15,13 @@ configuration_options = {
     },
     default = true,
   },
+  {
+    name = 'play_on_wagstaff_defeated',
+    label = '为老瓦播放关羽之歌',
+    options = {
+      { description = '开启', data = true },
+      { description = '关闭', data = false },
+    },
+    default = true,
+  },
 }
