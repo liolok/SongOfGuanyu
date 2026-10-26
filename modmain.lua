@@ -42,7 +42,7 @@ end
 -- 首次击败藏影女王触发
 
 if GetModConfigData('play_on_charlie_defeated') and TheNet:GetIsClient() then
-  AddPrefabPostInit('alterguardian_phase4_lunarrift', function(inst)
+  AddPrefabPostInit('charlie_boss', function(inst)
     inst:DoPeriodicTask(0.1, function(inst)
       if
         not inst.song_of_guanyu_played
