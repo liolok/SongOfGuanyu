@@ -42,7 +42,17 @@ end
 -- 首次击败藏影女王触发
 
 if GetModConfigData('play_on_charlie_defeated') and TheNet:GetIsClient() then
-  RemapSoundEvent('dontstarve/charlie/ohno', EVENT)
+  AddPrefabPostInit('alterguardian_phase4_lunarrift', function(inst)
+    inst:DoPeriodicTask(0.1, function(inst)
+      if
+        not inst.song_of_guanyu_played
+        and inst.AnimState:IsCurrentAnimation('return')
+      then
+        inst.song_of_guanyu_played = true
+        Play()
+      end
+    end)
+  end)
 end
 
 --------------------------------------------------------------------------------
