@@ -39,26 +39,8 @@ if TheNet:GetIsClient() or not TheNet:IsDedicated() then
 end
 
 --------------------------------------------------------------------------------
--- 藏影女王击败触发
+-- 首次击败藏影女王触发
 
-local CHARLIE_BOSS_DEFEATED_EVENT = 'song_of_guanyu_charlie_boss_defeated'
-
-local CHARLIE_BOSS_AUDIENCE_RADIUS = 10 -- 玩家距离 Boss 不超过此范围，才算在现场
-local function OnCharlieBossDefeatedClient(boss)
-  local player = G.ThePlayer
-  return player and player:IsNear(boss, CHARLIE_BOSS_AUDIENCE_RADIUS) and Play()
+if GetModConfigData('play_on_charlie_defeated') and TheNet:GetIsClient() then
+  RemapSoundEvent('dontstarve/charlie/ohno', EVENT)
 end
-
-local function OnCharlieBossDefeatedServer(boss)
-  if boss._song_of_guanyu then return boss._song_of_guanyu:push() end
-end
-
-AddPrefabPostInit('charlie_boss', function(inst)
-  inst._song_of_guanyu = G.net_event(inst.GUID, CHARLIE_BOSS_DEFEATED_EVENT)
-
-  inst:ListenForEvent(CHARLIE_BOSS_DEFEATED_EVENT, OnCharlieBossDefeatedClient)
-
-  if inst.ismastersim then -- 服务端只负责检测死亡并广播一次性网络事件
-    inst:ListenForEvent('death', OnCharlieBossDefeatedServer)
-  end
-end)
