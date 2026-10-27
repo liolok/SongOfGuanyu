@@ -7,6 +7,15 @@ dst_compatible = true
 all_clients_require_mod = true
 configuration_options = {
   {
+    name = 'play_on_death_announcement',
+    label = '死亡宣告播放关羽之歌',
+    options = {
+      { description = '开启', data = true },
+      { description = '关闭', data = false },
+    },
+    default = true,
+  },
+  {
     name = 'play_for_charlie',
     label = '为查理播放关羽之歌',
     options = {

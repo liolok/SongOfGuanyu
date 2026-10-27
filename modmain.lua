@@ -27,8 +27,10 @@ end
 --------------------------------------------------------------------------------
 -- 死亡宣告触发
 
--- 确保只在真正的玩家客户端以及非专用服务器的主机上工作
-if TheNet:GetIsClient() or not TheNet:IsDedicated() then
+if
+  (TheNet:GetIsClient() or not TheNet:IsDedicated()) -- 确保只在真正的玩家客户端以及非专用服务器的主机上工作
+  and GetClientConfig('play_on_death_announcement')
+then
   -- 拦截底层的网络公告入口，比动 UI 组件要安全和稳定得多
   if G.Networking_Announcement then
     local OldNetworking_Announcement = G.Networking_Announcement
