@@ -6,6 +6,9 @@ Assets = {
 local G = GLOBAL
 local TheNet = G.TheNet
 
+-- 只遵循各客户端的本地配置
+local function GetClientConfig(name) return GetModConfigData(name, true) end
+
 --------------------------------------------------------------------------------
 -- 客户端侧音频播放
 
@@ -41,7 +44,7 @@ end
 --------------------------------------------------------------------------------
 -- 首次击败藏影女王触发
 
-if GetModConfigData('play_on_charlie_defeated') and TheNet:GetIsClient() then
+if TheNet:GetIsClient() and GetClientConfig('play_for_charlie') then
   AddPrefabPostInit('charlie_boss', function(inst)
     inst:DoPeriodicTask(0.1, function(inst)
       if
@@ -58,7 +61,7 @@ end
 --------------------------------------------------------------------------------
 -- 首次击败天体后裔触发
 
-if GetModConfigData('play_on_wagstaff_defeated') and TheNet:GetIsClient() then
+if TheNet:GetIsClient() and GetClientConfig('play_for_wagstaff') then
   AddPrefabPostInit('alterguardian_phase4_lunarrift', function(inst)
     inst:DoPeriodicTask(0.1, function(inst)
       if

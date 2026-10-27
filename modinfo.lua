@@ -7,7 +7,7 @@ dst_compatible = true
 all_clients_require_mod = true
 configuration_options = {
   {
-    name = 'play_on_charlie_defeated',
+    name = 'play_for_charlie',
     label = '为查理播放关羽之歌',
     options = {
       { description = '开启', data = true },
@@ -16,7 +16,7 @@ configuration_options = {
     default = true,
   },
   {
-    name = 'play_on_wagstaff_defeated',
+    name = 'play_for_wagstaff',
     label = '为老瓦播放关羽之歌',
     options = {
       { description = '开启', data = true },
